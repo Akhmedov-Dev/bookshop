@@ -2,1783 +2,201 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Books - Shopping</title>
-    <link rel="shortcut icon" href="Images/logo.png" />
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
-    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-    <style>
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            transition: 0.3s ease-in-out;
-        }
-
-        :root {
-            --color-black: #2b2b2b;
-            --color-white: #fff;
-            --color-logo: #706d6d;
-            --color-cart-back: #453e3b;
-            --height-header: 4rem;
-            --color-blue: #1b8bcc;
-            --border-color: #00000017;
-        }
-
-        .darkLight {
-            --color-black: #fff;
-            --color-white: #2b2b2b;
-            --color-logo: rgb(255, 255, 255, 0.5);
-            --color-blue: #fff;
-            --border-color: rgba(255, 255, 255, 0.09);
-        }
-
-        body {
-            background-color: var(--color-white);
-        }
-
-        li,
-        a {
-            text-decoration: none;
-            list-style: none;
-        }
-
-        button,
-        input {
-            border: none;
-            outline: none;
-        }
-
-        img {
-            width: 100%;
-            height: auto;
-        }
-
-        .section {
-            padding-block: 5rem 1rem;
-        }
-
-        .grid {
-            display: grid;
-        }
-
-        header {
-            position: fixed;
-            left: 0;
-            right: 0;
-            top: 0;
-            height: var(--height-header);
-            display: flex;
-            background-color: var(--color-white);
-            box-shadow: 0 6px 13px #00000017;
-            z-index: 111;
-        }
-
-        .container {
-            max-width: 1300px;
-            margin: auto;
-        }
-
-        header .nav {
-            justify-content: space-between;
-            grid-template-columns: 1fr 2.2fr 0.8fr;
-            column-gap: 2.5rem;
-        }
-
-        header .nav .nav_logo {
-            grid-template-columns: 0.6fr 3fr;
-            gap: 0.5rem;
-            align-items: center;
-            padding: 0.2rem 0;
-        }
-
-        header .nav .nav_logo span {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--color-logo);
-        }
-
-        header .nav .nav_menu {
-            display: flex;
-        }
-
-        header .nav .nav_menu .nav_list {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-        }
-
-        header .nav .nav_menu .nav_list .nav_item {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-        }
-
-        header .nav .nav_menu .nav__close {
-            display: none;
-        }
-
-        header .nav .nav_menu .nav_list .nav_link {
-            color: var(--color-black);
-            font-size: 1rem;
-            font-weight: 400;
-        }
-
-        header .nav .nav_menu .nav_list .nav_link:hover {
-            font-weight: 700;
-        }
-
-        header .nav .nav_menu .nav_list .active-link {
-            font-weight: 700;
-        }
-
-        header .nav .nav_icons {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        header .nav .nav_icons div {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-        }
-
-        header .nav .nav_icons i {
-            font-size: 1.3rem;
-            position: relative;
-            cursor: pointer;
-            color: var(--color-black);
-        }
-
-        header .nav .nav_icons span {
-            position: absolute;
-            right: -12px;
-            top: -8px;
-            font-size: 0.9rem;
-            background: #f7ca18;
-            color: #333;
-            width: 22px;
-            height: 22px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 50%;
-        }
-
-        header .nav .nav_icons .nav__toggle {
-            display: none;
-        }
-
-        .hide {
-            display: none !important;
-        }
-
-        .show {
-            display: flex;
-        }
-
-        .home {
-            position: relative;
-            height: calc(100vh - 4rem);
-            background-color: #1c1f25;
-            margin-top: 4rem;
-            overflow: hidden;
-        }
-
-        .home .home_bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            width: 100%;
-        }
-
-        .home .home_bg img {
-            height: 100vh;
-            position: absolute;
-            object-fit: cover;
-            object-position: left;
-            transition: 0.5s;
-        }
-
-        .home:hover .buttons {
-            display: flex;
-        }
-
-        .home .buttons {
-            position: absolute;
-            z-index: 1;
-            display: none;
-            justify-content: space-between;
-            align-items: center;
-            top: 0;
-            bottom: 0;
-            left: 1rem;
-            right: 1rem;
-        }
-
-        .home .buttons div {
-            font-size: 3rem;
-            box-shadow: 0 0 10px 5px #00000017;
-            background-color: var(--color-white);
-            color: var(--color-blue);
-            font-weight: 400;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-
-        .benefits {
-            box-shadow: 0 0 10px 5px #00000017;
-            background-color: var(--color-white);
-        }
-
-        .benefits .ben_cards {
-            grid-template-columns: repeat(4, 1fr);
-        }
-
-        .benefits .ben_card {
-            padding: 40px 25px;
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-            border-right: 1px solid var(--border-color);
-        }
-
-        .benefits .ben_card:last-child {
-            border: none;
-        }
-
-        .benefits .ben_card .left {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            max-width: 40px;
-        }
-
-        .benefits .ben_card .right {
-            color: var(--color-blue);
-        }
-
-        .benefits .ben_card .right h2 {
-            color: var(--color-blue);
-            font-size: 1.1rem;
-            padding-bottom: 10px;
-        }
-
-        .benefits .ben_card .right p {
-            font-size: 0.8rem;
-            color: var(--color-blue);
-        }
-
-        .products {
-            height: 100vh;
-            padding: 0 3rem;
-        }
-
-        .products h1 {
-            text-align: center;
-            padding: 2rem 0;
-            color: var(--color-blue);
-        }
-
-        .products .search {
-            text-align: end;
-        }
-
-        .products .product {
-            grid-template-columns: 300px 1fr;
-        }
-
-        .products .product .product-left {
-            display: flex;
-            flex-direction: column;
-            border-right: 1px solid var(--border-color);
-            border-top: 1px solid var(--border-color);
-            border-bottom: 1px solid var(--border-color);
-            margin-right: 0.5rem;
-            padding-top: 0.5rem;
-        }
-
-        .products .product .product-left .collections {
-            display: flex;
-            flex-direction: column;
-            align-items: start;
-            gap: 0.5rem;
-        }
-
-        .products .product .product-left .collections li {
-            font-weight: 400;
-            font-size: 1rem;
-            color: var(--color-black);
-            cursor: pointer;
-            position: relative;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .products .product .product-left .collections .list::before {
-            content: "";
-            position: absolute;
-            background: var(--color-blue);
-            left: 0px;
-            bottom: 4px;
-            height: 12px;
-            width: 12px;
-            border-radius: 50%;
-            opacity: 0;
-        }
-
-        .products .product .product-left .collections .list:hover::before {
-            opacity: 1;
-        }
-
-        .products .product .product-left .collections .list::after {
-            content: "";
-            position: absolute;
-            height: 1px;
-            background: var(--color-blue);
-            left: 0;
-            bottom: -2px;
-            width: 0;
-            transition: 0.3s;
-        }
-
-        .products .product .product-left .collections .list:hover::after {
-            content: "";
-            position: absolute;
-            width: 100%;
-        }
-
-        .products .product .product-left .collections .active {
-            color: var(--color-blue);
-        }
-
-        .products .product .product-left .collections .active::before {
-            content: "";
-            position: absolute;
-            background: var(--color-blue);
-            left: 0px;
-            bottom: 4px;
-            height: 12px;
-            width: 12px;
-            border-radius: 50%;
-            opacity: 1;
-        }
-
-        .products .product .product-left .collections .active::after {
-            content: "";
-            position: absolute;
-            height: 1px;
-            background: var(--color-blue);
-            left: 0;
-            bottom: -2px;
-            width: 100%;
-        }
-
-        .products .product .product-left .collections li span {
-            color: var(--color-black);
-            font-size: 0.7rem;
-        }
-
-        .products .product .product-left .collections li:hover {
-            color: var(--color-blue);
-        }
-
-        .title-left {
-            text-align: left;
-            font-size: 1.3rem;
-            font-weight: 400;
-            color: var(--color-black);
-            margin-bottom: 1rem;
-        }
-
-        .products .product .product-right .product-right-top {
-            margin-bottom: 3rem;
-        }
-
-        .products .product .product-right .product-right-top .form {
-            box-shadow: 0 0 10px 5px #00000017;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            overflow: hidden;
-            width: 100%;
-            height: 3rem;
-            align-items: center;
-            grid-template-columns: 1fr 80px;
-        }
-
-        .products .product .product-right .product-right-top .form .input {
-            padding-left: 1rem;
-            background-color: transparent;
-            color: var(--color-black);
-            font-size: 1rem;
-        }
-
-        .products .product .product-right .product-right-top .form .input::placeholder {
-            color: var(--color-black);
-        }
-
-        .products .product .product-right .product-right-top .form i {
-            font-size: 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            background-color: #47ddaa;
-            cursor: pointer;
-            color: #333;
-        }
-
-        .products .product .product-right .product-right-bottom {
-            max-height: calc(100vh - 6rem);
-            grid-template-columns: repeat(4, 1fr);
-            grid-template-rows: max-content;
-            column-gap: 1.5rem;
-            row-gap: 2rem;
-            overflow-y: scroll;
-            padding: 1rem;
-            border: 1px solid var(--border-color);
-        }
-
-        .products .product .product-right .product-right-bottom::-webkit-scrollbar {
-            display: none;
-        }
-
-        .products .product .product-right .product-right-bottom .book-card {
-            cursor: pointer;
-            transition: 0.5s;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .products .product .product-right .product-right-bottom .book-card:hover {
-            box-shadow: 0 0 12px 4px #00000017;
-        }
-
-        .products .product .product-right .product-right-bottom .book-card:hover .book-image::after {
-            background-color: transparent;
-        }
-
-        .products .product .product-right .product-right-bottom .book-card .book-image {
-            position: relative;
-            min-height: 370px;
-        }
-
-        .products .product .product-right .product-right-bottom .book-card .book-image img {
-            object-fit: fill;
-            width: 100%;
-            height: 100%;
-        }
-
-        .products .product .product-right .product-right-bottom .book-card .book-image::after {
-            content: "";
-            position: absolute;
-            background-color: rgba(0, 0, 0, 0.2);
-            left: 0;
-            right: 0;
-            height: 100%;
-            transition: 0.3s;
-        }
-
-        .products .product .product-right .product-right-bottom .book-card .book-details {
-            padding: 0.8rem;
-            display: flex;
-            height: 100%;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .products .product .product-right .product-right-bottom .book-card .book-details .book-type {
-            color: var(--color-black);
-            font-size: 0.7rem;
-            margin-bottom: 5px;
-            text-transform: capitalize;
-        }
-
-        .products .product .product-right .product-right-bottom .book-card .book-details .book-title {
-            color: var(--color-black);
-            font-size: 0.95rem;
-            margin-bottom: 8px;
-            text-transform: capitalize;
-        }
-
-        .products .product .product-right .product-right-bottom .book-card .book-details .book-author {
-            color: var(--color-black);
-            font-size: 0.7rem;
-            margin-bottom: 8px;
-            text-transform: capitalize;
-        }
-
-        .products .product .product-right .product-right-bottom .book-card .book-details .book-price {
-            color: var(--color-blue);
-            font-size: 1rem;
-        }
-
-        .products .product .product-right .product-right-bottom .book-card .book-details .buttons {
-            opacity: 0;
-            display: flex;
-            height: 100%;
-            align-items: end;
-            justify-content: space-between;
-            margin-top: 0.5rem;
-            position: relative;
-        }
-
-        .products .product .product-right .product-right-bottom .book-card:hover .book-details .buttons {
-            opacity: 1;
-            display: flex;
-            position: relative;
-        }
-
-        .products .product .product-right .product-right-bottom .book-card .book-details .buttons .inOption {
-            position: absolute;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            right: 0;
-            bottom: 20%;
-            transition: 0.3s;
-            opacity: 0;
-            z-index: -11;
-        }
-
-        .products .product .product-right .product-right-bottom .book-card .book-details .buttons .show {
-            transition: 0.3s;
-            position: absolute;
-            display: flex;
-            flex-direction: column;
-            opacity: 1;
-            gap: 1rem;
-            right: 0;
-            bottom: 30px;
-            z-index: 11;
-        }
-
-        .products .product .product-right .product-right-bottom .book-card .book-details .buttons button {
-            padding: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: var(--color-blue);
-            color: var(--color-white);
-            border-radius: 8px;
-            cursor: pointer;
-            border: 1px solid transparent;
-        }
-
-        .products .product .product-right .product-right-bottom .book-card .book-details .buttons button:hover {
-            background: transparent;
-            border: 1px solid var(--color-blue);
-            color: var(--color-black);
-            letter-spacing: 1px;
-        }
-
-        .products .product .product-right .product-right-bottom .book-card .book-details .buttons i {
-            color: var(--color-blue);
-            font-size: 1.3rem;
-        }
-
-        #heart:hover {
-            color: red;
-        }
-
-        .card {
-            position: fixed;
-            top: 0;
-            z-index: 1111;
-            left: 100%;
-            width: 500px;
-            background-color: var(--color-cart-back);
-            height: 100vh;
-        }
-
-        .active .card {
-            left: calc(100% - 500px);
-        }
-
-        .active .container {
-            transform: translateX(-200px);
-        }
-
-        .card .all {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .card h1 {
-            color: #e8bc0e;
-            font-weight: 100;
-            padding: 0 20px;
-            height: 80px;
-            display: flex;
-            align-items: center;
-        }
-
-        .card .all button {
-            color: #333;
-            background: #e8bc0e;
-            border: none;
-            width: 100px;
-            height: 40px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            margin-right: 10px;
-            font-weight: 600;
-        }
-
-        .card .all button:hover {
-            background: #a4d0a4;
-            letter-spacing: 1px;
-        }
-
-        .card .checkOut {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            grid-template-columns: repeat(2, 1fr);
-        }
-
-        .card .checkOut div {
-            background-color: #e8bc0e;
-            width: 100%;
-            height: 70px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .card .checkOut div:nth-child(2) {
-            background-color: #1c1f25;
-            color: #fff;
-        }
-
-        .listCard li {
-            display: grid;
-            grid-template-columns: 70px repeat(3, 1fr);
-            color: #fff;
-            gap: 1rem;
-        }
-
-        .listCard li div {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-transform: capitalize;
-        }
-
-        .listCard li img {
-            width: 100%;
-            height: auto;
-            padding: 0.5rem;
-        }
-
-        .listCard li button {
-            background-color: #fff5;
-            border: none;
-            padding: 2px 6px;
-            cursor: pointer;
-        }
-
-        .listCard li button:last-child {
-            background-color: #fff5;
-            border: none;
-            padding: 2px 4px;
-        }
-
-        .listCard .count {
-            margin: 0 10px;
-        }
-
-        .popCard {
-            position: fixed;
-            background-color: hsla(0, 11%, 98%, 0.3);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            top: -100%;
-            left: 25%;
-            right: 25%;
-            bottom: initial;
-            z-index: 1111;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 1rem;
-            box-shadow: 0 0 5px #333;
-            border-radius: 5px;
-        }
-
-        .popCard h1 {
-            color: var(--color-black);
-            font-size: 1.5rem;
-        }
-
-        .popCard .popCardSaveButton {
-            background-color: var(--color-blue);
-            padding: .5rem 1rem;
-            font-size: 1rem;
-            color: var(--color-white);
-            border-radius: 5px;
-        }
-
-        .popActive {
-            top: 20%;
-            bottom: 20%;
-        }
-
-        .popCard .popCardForm {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            gap: 1.5rem;
-            padding: 1rem;
-        }
-
-        .popCard .popCardClose1 {
-            position: absolute;
-            right: 5%;
-            top: 5%;
-            font-size: 2rem;
-            box-shadow: 0 0 10px var(--color-black);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: var(--color-black);
-            border-radius: 50%;
-            padding: .5rem;
-            z-index: 111;
-        }
-
-        .popCard .popCardClose1:hover {
-            box-shadow: none;
-        }
-
-        .popCard .popCardForm input {
-            height: 2.5rem;
-            border-radius: 5px;
-            padding-left: .5rem;
-            color: var(--color-black);
-            background-color: var(--color-white);
-            box-shadow: 0 0 5px var(--color-black);
-            border: 1px solid var(--border-color);
-            text-transform: capitalize;
-        }
-
-        .popCard .popCardForm input::placeholder {
-            color: var(--color-black);
-        }
-
-        .popCard .popCardForm #popImage {
-            display: none;
-        }
-
-        .popCard .popCardForm .popImageCard {
-            padding: .5rem;
-            border-radius: 5px;
-            background-color: var(--color-white);
-            box-shadow: 0 0 5px var(--border-color);
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            box-shadow: 0 0 5px var(--color-black);
-        }
-
-        .popCard .popCardForm .popImageCard .popImageLabel {
-            color: var(--color-black);
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-        }
-
-        .popCard .popCardForm .popImageCard .popImagish {
-            width: 40px;
-            height: 40px;
-            object-fit: cover;
-            object-position: center;
-            border-radius: 10%;
-            box-shadow: 0 0 5px var(--border-color);
-            margin-left: 1rem;
-        }
-
-        @media screen and (max-width: 1300px) {
-            .container {
-                max-width: 100%;
-                margin: initial;
-                padding: 0 1rem;
-            }
-
-            .products .product .product-right .product-right-bottom {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .products .product .product-right .product-right-bottom .book-card .book-image {
-                position: relative;
-                max-height: 100%;
-            }
-        }
-
-        @media screen and (max-width: 1023px) {
-            html {
-                font-size: 80%;
-            }
-
-            :root {
-                --color-black: #2b2b2b;
-                --color-white: #fff;
-                --color-logo: #706d6d;
-                --color-cart-back: #453e3b;
-                --height-header: 8rem;
-                --color-blue: #1b8bcc;
-                --border-color: #00000017;
-            }
-
-            header .nav {
-                width: 100%;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                gap: 1rem;
-            }
-
-            header .nav .nav_menu {
-                position: fixed;
-                top: 0%;
-                left: -100%;
-                background-color: hsla(0, 0%, 0%, 0.3);
-                width: 40%;
-                height: 100%;
-                padding-block: 4rem;
-                backdrop-filter: blur(24px);
-                -webkit-backdrop-filter: blur(24px);
-                transition: left 0.4s;
-                z-index: 111;
-            }
-
-            .nav_logo {
-                display: flex;
-                justify-content: center;
-                width: 100%;
-            }
-
-            .nav_logo img {
-                width: 50px;
-            }
-
-            header .nav .nav_menu .nav_list {
-                text-align: center;
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-start;
-                row-gap: 2.5rem;
-            }
-
-            header .nav .nav_menu .nav_list .nav_item {
-                width: 100%;
-                display: flex;
-                justify-content: center;
-            }
-
-            header .nav .nav_menu .nav__close {
-                display: flex;
-                position: absolute;
-                z-index: 111;
-                color: var(--color-white);
-                font-size: 2rem;
-                right: 10%;
-                top: 5%;
-                cursor: pointer;
-
-            }
-
-            .ben_cards {
-                grid-template-columns: repeat(2, 1fr) !important;
-            }
-
-            .products {
-                padding: 0 1.5rem !important;
-            }
-
-            .product {
-                grid-template-columns: 150px 1fr !important;
-            }
-
-            header .nav .nav_icons .nav__toggle {
-                display: flex;
-            }
-
-            .show-menu {
-                left: 0 !important;
-            }
-
-            header .nav .nav_icons {
-                display: grid;
-                grid-template-columns: repeat(5, 1fr);
-            }
-
-            header .nav .nav_icons div {
-                flex: 1;
-                display: flex;
-                justify-content: center;
-            }
-
-            header .nav .nav_icons i {
-                font-size: 1.3rem;
-                position: relative;
-                cursor: pointer;
-                color: var(--color-black);
-            }
-
-            header .nav .nav_icons span {
-                position: absolute;
-                right: -12px;
-                top: -8px;
-                font-size: 0.9rem;
-                background: #f7ca18;
-                color: #333;
-                width: 22px;
-                height: 22px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                border-radius: 50%;
-            }
-        }
-
-        @media screen and (max-width: 300px) {
-            html {
-                font-size: 60%;
-            }
-
-            :root {
-                --color-black: #2b2b2b;
-                --color-white: #fff;
-                --color-logo: #706d6d;
-                --color-cart-back: #453e3b;
-                --height-header: 8rem;
-                --color-blue: #1b8bcc;
-                --border-color: #00000017;
-            }
-
-            header .nav {
-                width: 100%;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                gap: 1rem;
-            }
-
-            header .nav .nav_menu {
-                position: fixed;
-                top: 0%;
-                left: -100%;
-                background-color: hsla(0, 0%, 0%, 0.3);
-                width: 40%;
-                height: 100%;
-                padding-block: 4rem;
-                backdrop-filter: blur(24px);
-                -webkit-backdrop-filter: blur(24px);
-                transition: left 0.4s;
-                z-index: 111;
-            }
-
-            .nav_logo {
-                display: flex;
-                justify-content: center;
-                width: 100%;
-            }
-
-            .nav_logo img {
-                width: 50px;
-            }
-
-            header .nav .nav_menu .nav_list {
-                text-align: center;
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-start;
-                row-gap: 2.5rem;
-            }
-
-            header .nav .nav_menu .nav_list .nav_item {
-                width: 100%;
-                display: flex;
-                justify-content: center;
-            }
-
-            header .nav .nav_menu .nav__close {
-                display: flex;
-                position: absolute;
-                z-index: 111;
-                color: var(--color-white);
-                font-size: 2rem;
-                right: 10%;
-                top: 5%;
-                cursor: pointer;
-
-            }
-
-            .ben_cards {
-                grid-template-columns: repeat(1, 1fr) !important;
-            }
-
-            .products {
-                padding: 0 1.5rem !important;
-            }
-
-            .product {
-                grid-template-columns: 100px 1fr !important;
-            }
-
-            header .nav .nav_icons .nav__toggle {
-                display: flex;
-            }
-
-            .show-menu {
-                left: 0 !important;
-            }
-
-            header .nav .nav_icons {
-                display: grid;
-                grid-template-columns: repeat(5, 1fr);
-            }
-
-            header .nav .nav_icons div {
-                flex: 1;
-                display: flex;
-                justify-content: center;
-            }
-
-            header .nav .nav_icons i {
-                font-size: 1.3rem;
-                position: relative;
-                cursor: pointer;
-                color: var(--color-black);
-            }
-
-            header .nav .nav_icons span {
-                position: absolute;
-                right: -12px;
-                top: -8px;
-                font-size: 0.9rem;
-                background: #f7ca18;
-                color: #333;
-                width: 22px;
-                height: 22px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                border-radius: 50%;
-            }
-
-            .products .product .product-right .product-right-bottom {
-                grid-template-columns: repeat(1, 1fr);
-            }
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="bootstrap/swipper.min.css">
+    <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css" id="mod">
+    <title>Book | App</title>
 </head>
 
-<body>
+<body class="">
+
     <header>
-        <nav class="nav container grid" id="nav">
-            <a href="" class="nav_logo grid">
-                <img src="Images/logo.png" alt="" />
+        <nav>
+            <a href="" class="logo">
+                <img src="./assets/Images/logo.png" alt="">
                 <span>BOOKSHOP</span>
             </a>
-            <div class="nav_menu" id="nav_menu">
-                <ul class="nav_list">
-                    <li class="nav_item">
-                        <a href="" class="nav_link active-link">Home</a>
-                    </li>
-                    <li class="nav_item">
-                        <a href="" class="nav_link">Magazines</a>
-                    </li>
-                    <li class="nav_item">
-                        <a href="" class="nav_link">Books</a>
-                    </li>
-                    <li class="nav_item">
-                        <a href="" class="nav_link">Textbooks</a>
-                    </li>
-                    <li class="nav_item">
-                        <a href="" class="nav_link">Audiobooks</a>
-                    </li>
-                </ul>
-                <div class="nav__close" id="nav-close">
-                    <i class="ri-close-line"></i>
-                </div>
-            </div>
-            <div class="nav_icons">
-                <div class="nav__toggle" id="nav-toggle">
-                    <i class="ri-menu-fill"></i>
-                </div>
-                <div class="shopping-icon" id="cart">
-                    <i class="ri-shopping-cart-2-line">
-                        <span class="quantity">0</span></i>
-                </div>
-                <div class="like-icon">
-                    <i class="ri-heart-line"><span class="quantity">0</span></i>
-                </div>
-                <div class="user-icon">
-                    <i class="ri-user-line"></i>
-                </div>
-                <div class="light-icon">
-                    <i class="ri-sun-line" id="sun"></i>
-                    <i class="ri-moon-line hide" id="moon"></i>
-                </div>
-            </div>
+
+            <ul>
+                <li><a style="color: var(--color-black);font-size: 1rem;font-weight: 700;" href="">Home</a></li>
+                <li><a class="link_nav" href="">Magazines</a></li>
+                <li><a class="link_nav" href="">Books</a></li>
+                <li><a class="link_nav" href="">Textbooks</a></li>
+                <li><a class="link_nav" href="">Audiobooks</a></li>
+
+                <li></li><i class="fa-solid fa-cart-shopping icon_link"><span class="before_span">0</span></i></li>
+                <li><i class="fa-regular fa-heart icon_link"><span class="before_span">0</span></i></li>
+                <li><i class="fa-regular fa-user icon_link"></i></li>
+                <li><i id="sun" class="fa-regular fa-moon icon_link"></i></li>
+            </ul>
         </nav>
     </header>
-    <main class="main">
-        <section id="home" class="home section">
-            <div class="home_bg">
-                <img src="Images/homeBackground.jpg" alt="" />
-                <img src="Images/homeBackground2.jpg" alt="" />
+    <swiper-container class="mySwiper" navigation="true">
+        <swiper-slide>
+            <img src="assets/Images/homeBackground.jpg" alt="header_back_img">
+        </swiper-slide>
+        <swiper-slide><img src="assets/Images/homeBackground2.jpg" alt=""></swiper-slide>
+        <!-- <swiper-slide>Slide 3</swiper-slide>
+        <swiper-slide>Slide 4</swiper-slide>
+        <swiper-slide>Slide 5</swiper-slide>
+        <swiper-slide>Slide 6</swiper-slide>
+        <swiper-slide>Slide 7</swiper-slide>
+        <swiper-slide>Slide 8</swiper-slide>
+        <swiper-slide>Slide 9</swiper-slide> -->
+    </swiper-container>
+    <section class="instruct-of-shop">
+        <div class="instruct-of-shop_cards container grid">
+          <div class="instruct-of-shop_card">
+            <div class="left">
+              <img class="image-icon" src="./Assets/Images/delivery-truck.png" alt="">
+              <img class="image-icon hide" src="./Assets/Images/delivery-truck1.png" alt="">
             </div>
-            <div class="buttons">
-                <div class="leftArrow"><i class="ri-arrow-drop-left-line"></i></div>
-                <div class="rightArrow"><i class="ri-arrow-drop-right-line"></i></div>
+            <div class="right">
+              <h2>Quick Delivery</h2>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident</p>
             </div>
-        </section>
-        <section id="benefits" class="benefits">
-            <div class="ben_cards container grid">
-                <div class="ben_card">
-                    <div class="left">
-                        <img class="image-icon" src="Images/delivery-truck.png" alt="" />
-                        <img class="image-icon hide" src="Images/delivery-truck1.png" alt="" />
-                    </div>
-                    <div class="right">
-                        <h2>Quick Delivery</h2>
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
-                    </div>
-                </div>
-                <div class="ben_card">
-                    <div class="left">
-                        <img class="image-icon" src="Images/pay.png" alt="" />
-                        <img class="image-icon hide" src="Images/pay1.png" alt="" />
-                    </div>
-                    <div class="right">
-                        <h2>Pay with Easy</h2>
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
-                    </div>
-                </div>
-                <div class="ben_card">
-                    <div class="left">
-                        <img class="image-icon" src="Images/best-price.png" alt="" />
-                        <img class="image-icon hide" src="Images/best-price1.png" alt="" />
-                    </div>
-                    <div class="right">
-                        <h2>Best Deal</h2>
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
-                    </div>
-                </div>
-                <div class="ben_card">
-                    <div class="left">
-                        <img class="image-icon" src="Images/credit-card.png" alt="" />
-                        <img class="image-icon hide" src="Images/credit-card1.png" alt="" />
-                    </div>
-                    <div class="right">
-                        <h2>Secured Payment</h2>
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
-                    </div>
-                </div>
+          </div>
+          <div class="instruct-of-shop_card">
+            <div class="left">
+              <img class="image-icon" src="./Assets/Images/pay.png" alt="">
+              <img class="image-icon hide" src="./Assets/Images/pay1.png" alt="">
             </div>
-        </section>
-        <section id="products" class="products">
-            <h1>Products</h1>
-            <div class="product grid">
-                <div class="product-left">
-                    <h2 class="title-left">Categories</h2>
-                    <ul class="collections">
-                        <li class="list active" data-filter="all">
-                            <span class="active-list on">
-                                <i class="fa-regular fa-circle"></i>
-                            </span>
-                            All Collections
-                        </li>
-                        <li class="list" data-filter="modern">
-                            <span class="active-list on">
-                                <i class="fa-regular fa-circle"></i> </span>Modern
-                        </li>
-                        <li class="list" data-filter="biography">
-                            <span class="active-list on">
-                                <i class="fa-regular fa-circle"></i> </span>Biography
-                        </li>
-                        <li class="list" data-filter="classic">
-                            <span class="active-list on">
-                                <i class="fa-regular fa-circle"></i> </span>Classics
-                        </li>
-                        <li class="list" data-filter="cookbook">
-                            <span class="active-list on">
-                                <i class="fa-regular fa-circle"></i> </span>Cookbooks
-                        </li>
-                        <li class="list" data-filter="detective">
-                            <span class="active-list on">
-                                <i class="fa-regular fa-circle"></i> </span>Detective
-                        </li>
-                        <li class="list" data-filter="fantasy">
-                            <span class="active-list on">
-                                <i class="fa-regular fa-circle"></i> </span>Fantasy
-                        </li>
-                        <li class="list" data-filter="fairy tale">
-                            <span class="active-list on">
-                                <i class="fa-regular fa-circle"></i> </span>Fairy tale
-                        </li>
-                        <li class="list" data-filter="fiction">
-                            <span class="active-list on">
-                                <i class="fa-regular fa-circle"></i> </span>Fiction
-                        </li>
-                        <li class="list" data-filter="horror">
-                            <span class="active-list on">
-                                <i class="fa-regular fa-circle"></i> </span>Horror
-                        </li>
-                        <li class="list" data-filter="historical fiction">
-                            <span class="active-list on">
-                                <i class="fa-regular fa-circle"></i> </span>Historical fiction
-                        </li>
-                        <li class="list" data-filter="history">
-                            <span class="active-list on">
-                                <i class="fa-regular fa-circle"></i> </span>History
-                        </li>
-                        <li class="list" data-filter="romance">
-                            <span class="active-list on">
-                                <i class="fa-regular fa-circle"></i> </span>Romance
-                        </li>
-                    </ul>
-                </div>
-                <div class="product-right">
-                    <div class="product-right-top">
-                        <form class="form grid" action="">
-                            <input type="text" class="input" id="mySearch" placeholder="Search by Title..." />
-                            <i class="fa-solid fa-right-left" id="searchBtn"></i>
-                        </form>
-                    </div>
-                    <div class="product-right-bottom grid"></div>
-                </div>
+            <div class="right">
+              <h2>Pay with Easy</h2>
+              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo.</p>
             </div>
-        </section>
-    </main>
-    <div class="card">
+          </div>
+          <div class="instruct-of-shop_card">
+            <div class="left">
+              <img class="image-icon" src="./Assets/Images/best-price.png" alt="">
+              <img class="image-icon hide" src="./Assets/Images/best-price1.png" alt="">
+            </div>
+            <div class="right">
+              <h2>Best Deal</h2>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus.</p>
+            </div>
+          </div>
+          <div class="instruct-of-shop_card">
+            <div class="left">
+              <img class="image-icon" src="./Assets/Images/credit-card.png" alt="">
+              <img class="image-icon hide" src="./Assets/Images/credit-card1.png" alt="">
+            </div>
+            <div class="right">
+              <h2>Secured Payment</h2>
+              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+    <section id="products" class="products">
+        <h1>Products</h1>
+        <div class="product grid">
+            <div class="product-left">
+                <h2 class="title-left">Categories</h2>
+                <ul class="collections">
+                    <li class="list active" data-filter="all">
+                        <span class="active-list on">
+                            <i class="fa-regular fa-circle"></i>
+                        </span>
+                        All Collections
+                    </li>
+                    <li class="list" data-filter="modern">
+                        <span class="active-list on">
+                            <i class="fa-regular fa-circle"></i> </span>Modern
+                    </li>
+                    <li class="list" data-filter="biography">
+                        <span class="active-list on">
+                            <i class="fa-regular fa-circle"></i> </span>Biography
+                    </li>
+                    <li class="list" data-filter="classic">
+                        <span class="active-list on">
+                            <i class="fa-regular fa-circle"></i> </span>Classics
+                    </li>
+                    <li class="list" data-filter="cookbook">
+                        <span class="active-list on">
+                            <i class="fa-regular fa-circle"></i> </span>Cookbooks
+                    </li>
+                    <li class="list" data-filter="detective">
+                        <span class="active-list on">
+                            <i class="fa-regular fa-circle"></i> </span>Detective
+                    </li>
+                    <li class="list" data-filter="fantasy">
+                        <span class="active-list on">
+                            <i class="fa-regular fa-circle"></i> </span>Fantasy
+                    </li>
+                    <li class="list" data-filter="fairy tale">
+                        <span class="active-list on">
+                            <i class="fa-regular fa-circle"></i> </span>Fairy tale
+                    </li>
+                    <li class="list" data-filter="fiction">
+                        <span class="active-list on">
+                            <i class="fa-regular fa-circle"></i> </span>Fiction
+                    </li>
+                    <li class="list" data-filter="horror">
+                        <span class="active-list on">
+                            <i class="fa-regular fa-circle"></i> </span>Horror
+                    </li>
+                    <li class="list" data-filter="historical fiction">
+                        <span class="active-list on">
+                            <i class="fa-regular fa-circle"></i> </span>Historical fiction
+                    </li>
+                    <li class="list" data-filter="history">
+                        <span class="active-list on">
+                            <i class="fa-regular fa-circle"></i> </span>History
+                    </li>
+                    <li class="list" data-filter="romance">
+                        <span class="active-list on">
+                            <i class="fa-regular fa-circle"></i> </span>Romance
+                    </li>
+                </ul>
+            </div>
+            <div class="product-right">
+                <div class="product-right-top">
+                    <form class="form grid" action="">
+                        <input type="text" class="input" id="mySearch" placeholder="Search by Title..." />
+                        <i class="fa-solid fa-right-left" id="searchBtn"></i>
+                    </form>
+                </div>
+                <div class="product-right-bottom grid"></div>
+            </div>
+        </div>
+    </section>
+
+    <!--  <div class="card">
         <h1>Card</h1>
         <ul class="listCard"></ul>
         <div class="checkOut grid">
             <div class="total">0</div>
             <div class="closeShopping">Close</div>
         </div>
-    </div>
-    <div class="popCard">
-        <h1>Rename</h1>
-        <form class="popCardForm" action="">
-            <div class="popImageCard">
-                <label class="popImageLabel" for="popImage">Upload Image <img
-                        src="https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg" alt=""
-                        class="popImagish"></label>
-                <input type="file" name="upload" accept="image/png, image/jpeg" placeholder="Change Image..."
-                    id="popImage" />
-            </div>
-            <input type="text" placeholder="Change Title..." class="popTitle" />
-            <input type="text" placeholder="Change Type..." class="popType" />
-            <input type="text" placeholder="Change Author..." class="popAuthor" />
-            <input type="number" placeholder="Change Price..." class="popPrice" />
-        </form>
-        <div class="popCardClose1" id="popCardClose">
-            <i class="ri-close-line"></i>
-        </div>
-        <button class="popCardSaveButton" onclick="popCardSave()">Save</button>
-    </div>
-    <script>
-        let sun = document.querySelector("#sun"),
-            moon = document.querySelector("#moon"),
-            body = document.querySelector("body"),
-            cart = document.querySelector("#cart"),
-            closeShopping = document.querySelector(".closeShopping"),
-            homeBg = document.querySelector(".home_bg"),
-            leftArrow = document.querySelector(".leftArrow"),
-            rightArrow = document.querySelector(".rightArrow"),
-            imageIcons = document.querySelectorAll(".image-icon"),
-            list = document.querySelector(".product-right-bottom"),
-            li = document.querySelectorAll(".list"),
-            circle = document.querySelectorAll(".fa-circle"),
-            allList = document.querySelector(".all-list"),
-            listCard = document.querySelector(".listCard");
-        let total = document.querySelector(".total");
-        let quanity = document.querySelector(".quantity");
-        let bookType = document.querySelectorAll(".book-type");
-        const navMenu = document.getElementById("nav_menu"),
-            navToggle = document.getElementById("nav-toggle"),
-            navClose = document.getElementById("nav-close");
-        let products = [
-            {
-                id: 0,
-                type: "modern",
-                title: "big magic",
-                author: "donna karan",
-                image: "1.PNG",
-                price: 20.0,
-            },
-            {
-                id: 1,
-                type: "classic",
-                title: "i was born width music",
-                author: "dolce & cabanna",
-                image: "2.PNG",
-                price: 200.0,
-            },
-            {
-                id: 2,
-                type: "biography",
-                title: "i'm glad my mom died",
-                author: "jennette mcCurdy",
-                image: "3.PNG",
-                price: 21.99,
-            },
-            {
-                id: 3,
-                type: "detective",
-                title: "Warrior Soul: A Tye Caine Wilderness Mystery",
-                author: "David Barbur",
-                image: "4.PNG",
-                price: 4.99,
-            },
-            {
-                id: 4,
-                type: "fantasy",
-                title: "The Mountain in the Sea: A Novel",
-                author: "Ray Nayler",
-                image: "5.PNG",
-                price: 18.0,
-            },
-            {
-                id: 5,
-                type: "cookbook",
-                title: "Sweet Enough: A Dessert Cookbook",
-                author: "Alison Roman",
-                image: "6.PNG",
-                price: 32.55,
-            },
-            {
-                id: 6,
-                type: "fairy tale",
-                title: "Fairy Tale",
-                author: "Stephen King",
-                image: "7.PNG",
-                price: 30.23,
-            },
-            {
-                id: 7,
-                type: "fiction",
-                title: "Flash Fiction America: 73 Very Short Stories",
-                author: "John DuFresne , et al.",
-                image: "8.PNG",
-                price: 15.76,
-            },
-            {
-                id: 8,
-                type: "horror",
-                title: "Taaqtumi: An Anthology of Arctic Horror Stories",
-                author: "Thomas Anguti Johnston , et al.",
-                image: "9.PNG",
-                price: 15.76,
-            },
-            {
-                id: 9,
-                type: "historical fiction",
-                title:
-                    "The Things We Cannot Say: A WWII Historical Fiction Novel (Original)",
-                author: "Kelly Rimmer",
-                image: "10.PNG",
-                price: 15.8,
-            },
-            {
-                id: 10,
-                type: "history",
-                title: "The Secret History",
-                author: "Donna Tartt",
-                image: "11.PNG",
-                price: 16.74,
-            },
-            {
-                id: 11,
-                type: "romance",
-                title: "Daughter of the Moon Goddess: A Fantasy Romance Novel",
-                author: "Sue Lynn Tan",
-                image: "12.PNG",
-                price: 16.73,
-            },
-            {
-                id: 12,
-                type: "modern",
-                title: "Women Without Men: A Novel of Modern Iran",
-                author: "Shahrnush Parsipur , et al.",
-                image: "13.PNG",
-                price: 14.83,
-            },
-            {
-                id: 13,
-                type: "classic",
-                title: "War and Peace",
-                author: "Leo Tolstoy , et al.",
-                image: "14.PNG",
-                price: 20.46,
-            },
-            {
-                id: 14,
-                type: "biography",
-                title: "Barkley: A Biography (Original)",
-                author: "Timothy Bella",
-                image: "15.PNG",
-                price: 27.89,
-            },
-            {
-                id: 15,
-                type: "detective",
-                title: "The Detective Up Late",
-                author: "Adrian McKinty",
-                image: "16.PNG",
-                price: 25.1,
-            },
-            {
-                id: 16,
-                type: "fantasy",
-                title: "Legends & Lattes: A Novel of High Fantasy and Low Stakes",
-                author: "Travis Baldree",
-                image: "17.PNG",
-                price: 16.73,
-            },
-            {
-                id: 18,
-                type: "fairy tale",
-                title: "Fairy Tales for Fearless Girls",
-                author: "Anita Ganeri , et al.",
-                image: "19.PNG",
-                price: 18.59,
-            },
-            {
-                id: 19,
-                type: "fiction",
-                title: "Wonderbook (Revised and Expanded)",
-                author: "Jeff VanderMeer",
-                image: "20.PNG",
-                price: 25.58,
-            },
-            {
-                id: 20,
-                type: "horror",
-                title: "Nightmare Fuel: The Science of Horror Films",
-                author: "Nina Nesseth",
-                image: "21.PNG",
-                price: 24.17,
-            },
-            {
-                id: 21,
-                type: "historical fiction",
-                title: "Falconland: A Novel of Medieval",
-                author: "Reggie Connell",
-                image: "22.PNG",
-                price: 14.99,
-            },
-            {
-                id: 22,
-                type: "history",
-                title: "We Are the Land: A History of Native California",
-                author: "Damon B. Akins , et al.",
-                image: "23.PNG",
-                price: 27.85,
-            },
-            {
-                id: 23,
-                type: "romance",
-                title: "Rough Around the Hedges: an Uncanny Romance Novel",
-                author: "Lish McBride",
-                image: "24.PNG",
-                price: 16.73,
-            },
-        ];
-        navToggle.addEventListener("click", () => {
-            navMenu.classList.add("show-menu");
-        });
-        let listCards = [];
-        function initApp() {
-            products.forEach((value, key) => {
-                let newDiv = document.createElement("div");
-                newDiv.classList.add("book-card");
-                newDiv.setAttribute("data-item", `${value.type}`);
-                newDiv.innerHTML = `
-    <div class="book-image">
-    <img src="Images/${value.image}" alt="" class="book-imagish" />
-  </div>
-  <div class="book-details">
-    <div class="book-type">${value.type}</div>
-    <div class="book-title">${value.title}</div>
-    <div class="book-author">${value.author}</div>
-    <div class="book-price">
-      <span class="book-price-symbol">$</span>${value.price}
-    </div>
-    <div class="buttons">
-      <button class="addToCart" onclick="addToCard(${key})">Add to cart</button>
-      <i class="ri-heart-line" id="heart"></i>
-      <i class='bx bx-dots-vertical-rounded options' onclick="option(${key})" ></i>
-      <div class="inOption">
-                  <i class='bx bx-pencil' onclick="renameItem(${key})"></i>
-                  <i class="fa-solid fa-trash" onclick="removeItem(this)"></i>
-                </div>
-    </div>
-  </div>
-    `;
-                list.appendChild(newDiv);
-            });
-        }
-        initApp();
-        navClose.addEventListener("click", () => {
-            navMenu.classList.remove("show-menu");
-        });
-        for (let index = 0; index < circle.length; index++) {
-            li[index].addEventListener("click", function () {
-                for (let h = 0; h < li.length; h++) {
-                    li[h].classList.remove("active");
-                }
-                this.classList.add("active");
-                let dataFilter = li[index].getAttribute("data-filter");
-                bookType.forEach((item, index) => {
-                    console.log(item.innerHTML);
-                    console.log(index);
-                })
-                for (let k = 0; k < products.length; k++) {
-                    let box = list.querySelectorAll(".book-card");
-                    box[k].classList.remove("show");
-                    box[k].classList.add("hide");
-                    if (products[k].type == dataFilter || dataFilter == "all") {
-                        box[k].classList.remove("hide");
-                        box[k].classList.add("show");
-                    } else {
-                        console.log("Error");
-                    }
-                }
-            });
-        }
+    </div> -->
 
-        sun.addEventListener("click", () => {
-            body.classList.add("darkLight");
-            sun.classList.toggle("hide");
-            moon.classList.toggle("hide");
-            imageIcons.forEach((image) => {
-                image.classList.toggle("hide");
-            });
-        });
-        moon.addEventListener("click", () => {
-            body.classList.remove("darkLight");
-            sun.classList.toggle("hide");
-            moon.classList.toggle("hide");
-            imageIcons.forEach((image) => {
-                image.classList.toggle("hide");
-            });
-        });
-        cart.addEventListener("click", () => {
-            body.classList.toggle("active");
-        });
-        closeShopping.addEventListener("click", () => {
-            body.classList.remove("active");
-        });
-        window.onscroll = () => {
-            body.classList.remove("active");
-        };
-        let img = homeBg.querySelectorAll("img");
-        img.forEach((item, index) => {
-            item.style.left = `${index * 100}%`;
-        });
-        let counter = 0;
-        rightArrow.addEventListener("click", () => {
-            if (counter == img.length - 1) {
-                counter = 0;
-                slideImage();
-            } else {
-                counter++;
-                slideImage();
-            }
-        });
-        leftArrow.addEventListener("click", () => {
-            if (counter == 0) {
-                counter = img.length - 1;
-                slideImage();
-            } else {
-                counter--;
-                slideImage();
-            }
-        });
-        const slideImage = () => {
-            img.forEach((slide) => {
-                slide.style.transform = `translateX(-${counter * 100}%)`;
-            });
-        };
 
-        function addToCard(key) {
-            if (listCards[key] == null) {
-                listCards[key] = JSON.parse(JSON.stringify(products[key]));
-                listCards[key].quanity = 1;
-            }
-            reloadCard();
-        }
-        function reloadCard() {
-            listCard.innerHTML = "";
-            let count = 0;
-            let totalPrice = 0;
-            listCards.forEach((value, key) => {
-                totalPrice = totalPrice + value.price;
-                count = count + value.quanity;
-                if (value != null) {
-                    let newDiv = document.createElement("li");
-                    newDiv.innerHTML = `
-      <div><img src="Images/${value.image}"></div>
-      <div>${value.title}</div>
-      <div>$ ${value.price.toLocaleString()}</div>
-      <div>
-      <button onclick="changeQuanity(${key},${value.quanity - 1})">-</button>
-      <div class="count">${value.quanity}</div>
-      <button onclick="changeQuanity(${key},${value.quanity + 1})">+</button>
-      </div>`;
-                    listCard.appendChild(newDiv);
-                }
-            });
-            total.innerText = `$ ${totalPrice.toLocaleString()}`;
-            quanity.innerText = count;
-        }
-        function changeQuanity(key, quantity) {
-            if (quantity == 0) {
-                delete listCards[key];
-            } else {
-                listCards[key].quanity = quantity;
-                listCards[key].price = quantity * products[key].price;
-            }
-            reloadCard();
-        }
-        let bookCards = document.querySelectorAll(".book-card");
-        let inOption = document.querySelectorAll(".inOption");
-        function option(key) {
-            inOption[key].classList.toggle("show");
-        }
-        let bookTitle = document.querySelectorAll(".book-title");
-
-        let bookPrice = document.querySelectorAll(".book-price");
-        let bookImagish = document.querySelectorAll(".book-imagish");
-        let bookAuthor = document.querySelectorAll(".book-author");
-        let mySearch = document.querySelector("#mySearch");
-        let searchBtn = document.querySelector("#searchBtn");
-        let popCardClose = document.querySelector("#popCardClose");
-        let popCard = document.querySelector(".popCard");
-        let popImage = document.querySelector("#popImage"),
-            popTitle = document.querySelector(".popTitle"),
-            popType = document.querySelector(".popType"),
-            popAuthor = document.querySelector(".popAuthor"),
-            popPrice = document.querySelector(".popPrice"),
-            popImagish = document.querySelector(".popImagish");
-        let num;
-        let x = 0;
-        function renameItem(key) {
-            num = key;
-            popCard.classList.add("popActive");
-            let imageSrc = bookImagish[key].src;
-            popImagish.src = imageSrc;
-            popType.value = bookType[key].innerHTML;
-            popTitle.value = bookTitle[key].innerHTML;
-            popAuthor.value = bookAuthor[key].innerHTML;
-            popPrice.value = products[key].price;
-            popImage.onchange = function () {
-                popImagish.src = URL.createObjectURL(popImage.files[0]);
-                x = 1;
-            };
-            popCardClose.addEventListener("click", () => {
-                popCard.classList.remove("popActive");
-            });
-        }
-        function popCardSave() {
-            if (
-                popTitle.value != "" &&
-                popType.value != "" &&
-                popAuthor.value != "" &&
-                popPrice.value != ""
-            ) {
-                let popTitleValue = popTitle.value,
-                    popTypeValue = popType.value.toLowerCase(),
-                    popAuthorValue = popAuthor.value,
-                    popPriceValue = popPrice.value;
-                if (x == 1) {
-                    bookImagish[num].src = URL.createObjectURL(popImage.files[0]);
-                }
-                products[num].type = popTypeValue;
-                bookType[num].innerHTML = popTypeValue;
-                bookTitle[num].innerHTML = popTitleValue;
-                bookPrice[num].innerHTML = `$${popPriceValue}`;
-                bookAuthor[num].innerHTML = popAuthorValue;
-
-                popCard.classList.remove("popActive");
-            } else {
-                alert("To'ldir");
-            }
-        }
-        function removeItem(l) {
-            l.parentElement.parentElement.parentElement.parentElement.remove();
-        }
-
-        mySearch.placeholder = "Search by Title...";
-        searchBtn.addEventListener("click", () => {
-            mySearch.value = "";
-            if (mySearch.placeholder == "Search by Type...") {
-                mySearch.placeholder = "Search by Title...";
-                let input = mySearch.value.toUpperCase();
-                bookTitle.forEach((item, index) => {
-                    if (item.innerHTML.toUpperCase().indexOf(input) > -1) {
-                        bookCards[index].style.display = "flex";
-                    } else {
-                        bookCards[index].style.display = "none";
-                    }
-                });
-            } else {
-                mySearch.placeholder = "Search by Type...";
-                let input = mySearch.value.toUpperCase();
-                bookType.forEach((item, index) => {
-                    if (item.innerHTML.toUpperCase().indexOf(input) > -1) {
-                        bookCards[index].style.display = "flex";
-                    } else {
-                        bookCards[index].style.display = "none";
-                    }
-                });
-            }
-        });
-        mySearch.addEventListener("keyup", () => {
-            let input = mySearch.value.toUpperCase();
-            if (mySearch.placeholder == "Search by Title...") {
-                bookTitle.forEach((item, index) => {
-                    if (item.innerHTML.toUpperCase().indexOf(input) > -1) {
-                        bookCards[index].style.display = "flex";
-                    } else {
-                        bookCards[index].style.display = "none";
-                    }
-                });
-            } else {
-                bookType.forEach((item, index) => {
-                    if (item.innerHTML.toUpperCase().indexOf(input) > -1) {
-                        bookCards[index].style.display = "flex";
-                    } else {
-                        bookCards[index].style.display = "none";
-                    }
-                });
-            }
-        });
-
+    <script src="script.js">
+        // let sun = document.getElementById("sun")
+        // sun.addEventListener("click", () => {
+        //     let mood = document.getElementById("mod")
+        //     if (mood.getAttribute("href") == "CSS/style.css", sun.getAttribute("class") == "fa-regular fa-moon icon_link") {
+        //         mood.href = "CSS/qora.css"
+        //         sun.class = "fa-regular fa-sun icon_link"
+        //     }
+        //     else {
+        //         sun.class = "fa-regular fa-moon icon_link"
+        //         mood.href = "CSS/style.css"
+        //     }
+        // }); 
     </script>
+    <script src="bootstrap/bootstrap.min.js"></script>
+    <script src="bootstrap/swipper.min.js"></script>
 </body>
 
 </html>
