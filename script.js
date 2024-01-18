@@ -1,10 +1,14 @@
 let list = document.querySelector(".product-right-bottom"),
     circle = document.querySelectorAll(".fa-circle"),
     li = document.querySelectorAll(".list"),
-    sun = document.querySelector("#sun"),
-    moon = document.querySelector("#moon"),
-    bookType = document.querySelectorAll(".book-type");
-
+    bookType = document.querySelectorAll(".book-type"),
+    cart = document.getElementById("cart"),
+    body = document.querySelector("body"),
+    closeShopping = document.querySelector(".closeShopping"),
+    listCard = document.querySelector(".listCard"),
+    quantity = document.querySelector(".quanity"),
+    total = document.querySelector(".total");
+let listCards = []
 let products = [
     {
         id: 0,
@@ -258,16 +262,67 @@ for (let index = 0; index < circle.length; index++) {
 
     })
 }
-sun.addEventListener("click", () => {
-    var mood = document.getElementById("mood")
-    if (mood.getAttribute("href") == "CSS/style.css", sun.getAttribute("class") == "fa-regular fa-sun icon_link") {
-        mood.href = "CSS/qora.css"
-        sun.className = "fa-regular fa-moon icon_link"
-    }
-    else {
-        sun.className = "fa-regular fa-sun icon_link"
-        mood.href = "CSS/style.css"
-    }
+let mySearch = document.getElementById("mySearch");
+let bookCards = document.querySelectorAll(".book-card");
+
+mySearch.addEventListener("keyup", () => {
+    let input = mySearch.value.toUpperCase(),
+        bookTitle = document.querySelectorAll(".book-title");
+
+    bookTitle.forEach((item, index) => {
+        if (item.innerHTML.toUpperCase().indexOf(input) > -1) {
+            bookCards[index].style.display = "block"
+        }
+        else {
+            bookCards[index].style.display = "none"
+        }
+    })
+});
+let counter = 0;
+cart.addEventListener("click", () => {
+    body.classList.toggle("active");
+});
+closeShopping.addEventListener("click", () => {
+    body.classList.remove("active");
 });
 
-
+function addToCard(key) {
+    if (listCards[key] == null) {
+        listCards[key] = JSON.parse(JSON.stringify(products[key]));
+        listCards[key].quanity = 1;
+    }
+    reloadCard();
+}
+function reloadCard() {
+    listCard.innerHTML = "";
+    let count = 0;
+    let totalPrice = 0;
+    listCards.forEach((value, key) => {
+        totalPrice = totalPrice + value.price;
+        count = count + value.quanity;
+        if (value != null) {
+            let newDiv = document.createElement("li");
+            newDiv.innerHTML = `
+        <div><img src="./Assets/Images/${value.image}"></div>
+        <div>${value.title}</div>
+        <div>$ ${value.price.toLocaleString()}</div>
+        <div>
+        <button onclick="changeQuanity(${key},${value.quanity - 1})">-</button>
+        <div class="count">${value.quanity}</div>
+        <button onclick="changeQuanity(${key},${value.quanity + 1})">+</button>
+        </div>`;
+            listCard.appendChild(newDiv);
+        }
+    });
+    total.innerText = `$ ${totalPrice.toLocaleString()}`;
+    quanity.innerText = count;
+}
+function changeQuanity(key, quantity) {
+    if (quantity == 0) {
+        delete listCards[key];
+    } else {
+        listCards[key].quanity = quantity;
+        listCards[key].price = quantity * products[key].price;
+    }
+    reloadCard();
+}

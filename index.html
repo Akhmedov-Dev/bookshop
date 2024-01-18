@@ -4,96 +4,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" href="assets/Images/logo.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
     <link rel="stylesheet" href="bootstrap/swipper.min.css">
     <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="style.css" id="mod">
+    <link rel="stylesheet" href="style.css" id="default">
     <title>Book | App</title>
 </head>
 
 <body class="">
 
     <header>
-        <nav>
-            <a href="" class="logo">
-                <img src="./assets/Images/logo.png" alt="">
+        <nav class="nav container grid" id="nav">
+            <a href="" class="nav_logo grid">
+                <img src="./Assets/Images/logo.png" alt="">
                 <span>BOOKSHOP</span>
             </a>
+            
+            <div class="nav_menu" id="nav_menu">
+                <ul class="nav_list">
+                    <li class="nav_item">
+                        <a href="" class="nav_link active">Home</a>
+                    </li>
+                    <li class="nav_item">
+                        <a href="" class="nav_link active">Magazines</a>
+                    </li>
+                    <li class="nav_item">
+                        <a href="" class="nav_link active">Books</a>
+                    </li>
+                    <li class="nav_item">
+                        <a href="" class="nav_link active">Textbooks</a>
+                    </li>
+                    <li class="nav_item">
+                        <a href="" class="nav_link active">Audiobooks</a>
+                    </li>
+                </ul>
+                <div class="nav__close" id="nav-close ">
+                    <i class="ri-close-line active"></i>
+                </div>
+            </div>
+            <div class="nav_icons">
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class="ri-menu-fill active"></i>
+                </div>
+                <div class="shopping-icon" id="cart">
+                    <i class="ri-shopping-cart-2-line active">
+                        <span class="quantity active">0</span></i>
+                </div>
+                <div class="like-icon">
+                    <i class="ri-heart-line active"><span class="quantity">0</span></i>
+                </div>
+                <div class="user-icon">
+                    <i class="ri-user-line active"></i>
+                </div>
+                <div class="light-icon">
+                    <i class="ri-moon-line active" id="btn"></i>
+                </div>
+            </div>
 
-            <ul>
-                <li><a style="color: var(--color-black);font-size: 1rem;font-weight: 700;" href="">Home</a></li>
-                <li><a class="link_nav" href="">Magazines</a></li>
-                <li><a class="link_nav" href="">Books</a></li>
-                <li><a class="link_nav" href="">Textbooks</a></li>
-                <li><a class="link_nav" href="">Audiobooks</a></li>
-
-                <li></li><i class="fa-solid fa-cart-shopping icon_link"><span class="before_span">0</span></i></li>
-                <li><i class="fa-regular fa-heart icon_link"><span class="before_span">0</span></i></li>
-                <li><i class="fa-regular fa-user icon_link"></i></li>
-                <li><i id="sun" class="fa-regular fa-moon icon_link"></i></li>
-            </ul>
         </nav>
+        <!-- <nav class="navbar navbar-expand-lg bg_nav">
+            <div class="container">
+                <a href="#" class="logo">
+                    <img src="assets/Images/logo.png" alt="">
+                    <span class="navbar-brand" href="#">BOOKSHOP</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-lg-10 mb-lg-10">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Magazines</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Books</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Textbooks</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Audiobooks</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#"><i id="cart"
+                                    class="fa-solid fa-cart-shopping icon_link"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#"><i
+                                    class="fa-regular fa-heart icon_link"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#"><i
+                                    class="fa-regular fa-user icon_link"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#"><i id="btn"
+                                    class="fa-regular fa-moon icon_link"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav> -->
     </header>
     <swiper-container class="mySwiper" navigation="true">
         <swiper-slide>
             <img src="assets/Images/homeBackground.jpg" alt="header_back_img">
         </swiper-slide>
         <swiper-slide><img src="assets/Images/homeBackground2.jpg" alt=""></swiper-slide>
-        <!-- <swiper-slide>Slide 3</swiper-slide>
-        <swiper-slide>Slide 4</swiper-slide>
-        <swiper-slide>Slide 5</swiper-slide>
-        <swiper-slide>Slide 6</swiper-slide>
-        <swiper-slide>Slide 7</swiper-slide>
-        <swiper-slide>Slide 8</swiper-slide>
-        <swiper-slide>Slide 9</swiper-slide> -->
     </swiper-container>
     <section class="instruct-of-shop">
         <div class="instruct-of-shop_cards container grid">
-          <div class="instruct-of-shop_card">
-            <div class="left">
-              <img class="image-icon" src="./Assets/Images/delivery-truck.png" alt="">
-              <img class="image-icon hide" src="./Assets/Images/delivery-truck1.png" alt="">
+            <div class="instruct-of-shop_card">
+                <div class="left">
+                    <img class="image-icon" src="./Assets/Images/delivery-truck.png" alt="">
+                    <img class="image-icon hide" src="./Assets/Images/delivery-truck1.png" alt="">
+                </div>
+                <div class="right">
+                    <h2>Quick Delivery</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident</p>
+                </div>
             </div>
-            <div class="right">
-              <h2>Quick Delivery</h2>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident</p>
+            <div class="instruct-of-shop_card">
+                <div class="left">
+                    <img class="image-icon" src="./Assets/Images/pay.png" alt="">
+                    <img class="image-icon hide" src="./Assets/Images/pay1.png" alt="">
+                </div>
+                <div class="right">
+                    <h2>Pay with Easy</h2>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo.</p>
+                </div>
             </div>
-          </div>
-          <div class="instruct-of-shop_card">
-            <div class="left">
-              <img class="image-icon" src="./Assets/Images/pay.png" alt="">
-              <img class="image-icon hide" src="./Assets/Images/pay1.png" alt="">
+            <div class="instruct-of-shop_card">
+                <div class="left">
+                    <img class="image-icon" src="./Assets/Images/best-price.png" alt="">
+                    <img class="image-icon hide" src="./Assets/Images/best-price1.png" alt="">
+                </div>
+                <div class="right">
+                    <h2>Best Deal</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus.</p>
+                </div>
             </div>
-            <div class="right">
-              <h2>Pay with Easy</h2>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo.</p>
+            <div class="instruct-of-shop_card">
+                <div class="left">
+                    <img class="image-icon" src="./Assets/Images/credit-card.png" alt="">
+                    <img class="image-icon hide" src="./Assets/Images/credit-card1.png" alt="">
+                </div>
+                <div class="right">
+                    <h2>Secured Payment</h2>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio.
+                    </p>
+                </div>
             </div>
-          </div>
-          <div class="instruct-of-shop_card">
-            <div class="left">
-              <img class="image-icon" src="./Assets/Images/best-price.png" alt="">
-              <img class="image-icon hide" src="./Assets/Images/best-price1.png" alt="">
-            </div>
-            <div class="right">
-              <h2>Best Deal</h2>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus.</p>
-            </div>
-          </div>
-          <div class="instruct-of-shop_card">
-            <div class="left">
-              <img class="image-icon" src="./Assets/Images/credit-card.png" alt="">
-              <img class="image-icon hide" src="./Assets/Images/credit-card1.png" alt="">
-            </div>
-            <div class="right">
-              <h2>Secured Payment</h2>
-              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio.
-              </p>
-            </div>
-          </div>
         </div>
-      </section>
+    </section>
 
 
 
@@ -162,7 +233,8 @@
             <div class="product-right">
                 <div class="product-right-top">
                     <form class="form grid" action="">
-                        <input type="text" class="input" id="mySearch" placeholder="Search by Title..." />
+                        <input type="text" class="input" onkeyup="mySearch()" id="mySearch"
+                            placeholder="Search by Title..." />
                         <i class="fa-solid fa-right-left" id="searchBtn"></i>
                     </form>
                 </div>
@@ -171,32 +243,34 @@
         </div>
     </section>
 
-    <!--  <div class="card">
+    <div class="card">
         <h1>Card</h1>
         <ul class="listCard"></ul>
         <div class="checkOut grid">
             <div class="total">0</div>
             <div class="closeShopping">Close</div>
         </div>
-    </div> -->
+    </div>
 
 
-    <script src="script.js">
-        // let sun = document.getElementById("sun")
-        // sun.addEventListener("click", () => {
-        //     let mood = document.getElementById("mod")
-        //     if (mood.getAttribute("href") == "CSS/style.css", sun.getAttribute("class") == "fa-regular fa-moon icon_link") {
-        //         mood.href = "CSS/qora.css"
-        //         sun.class = "fa-regular fa-sun icon_link"
-        //     }
-        //     else {
-        //         sun.class = "fa-regular fa-moon icon_link"
-        //         mood.href = "CSS/style.css"
-        //     }
-        // }); 
-    </script>
+    <script src="script.js"></script>
     <script src="bootstrap/bootstrap.min.js"></script>
     <script src="bootstrap/swipper.min.js"></script>
+    <script src="bootstrap/boxicon.min.js"></script>
+    <script>
+        let btn = document.getElementById("btn")
+        btn.addEventListener("click", () => {
+            let body = document.querySelector("body");
+            if (body.classList.toggle("darkLight")) {
+                btn.classList.toggle("ri-sun-line")
+            } else {
+                body.classList.toggle("")
+                btn.classList.toggle("ri-moon-line")
+            }
+        })
+
+
+    </script>
 </body>
 
 </html>
